@@ -52,7 +52,7 @@ function setup() {
   for (let i = 0; i < starsNum; i++) stars[i] = new Star();
 
   // Delay redirect readiness
-  setTimeout(() => (redirectReady = true), 10000);
+  setTimeout(() => (redirectReady = true), 3000);
 }
 
 function draw() {
