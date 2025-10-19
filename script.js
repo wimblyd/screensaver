@@ -27,15 +27,10 @@ class Star {
     let sy = map(this.y / this.z, 0, 1, 0, height / 2);
     let r = map(this.z, 0, width, 6, 0);
 
-    // twinkle
-    fill(random(180, 255));
-    noStroke();
-    ellipse(sx, sy, r, r);
-
     // trail
     let px = map(this.x / this.pz, 0, 1, 0, width / 2);
     let py = map(this.y / this.pz, 0, 1, 0, height / 2);
-    stroke(255, 150);
+    stroke(255, 50);
     line(px, py, sx, sy);
 
     this.pz = this.z;
