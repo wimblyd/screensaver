@@ -1,4 +1,4 @@
-let speed = 4;
+let speed = 6;
 let stars = [];
 let starsNum = 500;
 let fading = false;
