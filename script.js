@@ -30,7 +30,7 @@ class Star {
     // trail
     let px = map(this.x / this.pz, 0, 1, 0, width / 2);
     let py = map(this.y / this.pz, 0, 1, 0, height / 2);
-    stroke(255, 100);
+    stroke(255, 170);
     line(px, py, sx, sy);
 
     this.pz = this.z;
