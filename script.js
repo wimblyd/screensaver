@@ -43,43 +43,61 @@ class Star {
 }
 
 function setup() {
-  createCanvas(600, 600);
+  // Create full-window canvas
+  let canvas = createCanvas(windowWidth, windowHeight);
+
+  // High DPI scaling
+  const ctx = canvas.elt.getContext("2d");
+  const dpr = window.devicePixelRatio || 1;
+  canvas.elt.width = windowWidth * dpr;
+  canvas.elt.height = windowHeight * dpr;
+  ctx.scale(dpr, dpr);
+
+  // Initialize stars
   for (let i = 0; i < starsNum; i++) stars[i] = new Star();
-  // wait before listening for user input
+
+  // Delay redirect readiness
   setTimeout(() => (redirectReady = true), 10000);
 }
 
 function draw() {
-  // semi-transparent background for trails
+  // Clear frame (semi-transparent for trails)
   background(0, 40);
 
-  // subtle CRT flicker
+  // Center and subtle flicker
   translate(width / 2, height / 2);
   scale(random(0.97, 1.03));
 
-  // draw all stars
+  // Draw stars
   for (let s of stars) {
     s.update();
     s.show();
   }
 
-  // fade overlay if triggered
+  // Fade out overlay
   if (fading) {
     noStroke();
     fill(0, fadeAlpha);
     rect(-width / 2, -height / 2, width, height);
     fadeAlpha += 10;
     if (fadeAlpha >= 255) {
-      // redirect when fully faded
       window.location.href = "https://wimblyd.github.io/tripletriad/checklist.html";
     }
   }
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  // Recreate DPR scaling on resize
+  const ctx = drawingContext;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.elt.width = windowWidth * dpr;
+  canvas.elt.height = windowHeight * dpr;
+  ctx.scale(dpr, dpr);
+}
+
 function triggerFade() {
-  if (redirectReady && !fading) {
-    fading = true;
-  }
+  if (redirectReady && !fading) fading = true;
 }
 
 function mouseMoved() { triggerFade(); }
